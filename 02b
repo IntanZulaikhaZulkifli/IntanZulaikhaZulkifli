@@ -6,7 +6,7 @@
 
 int main() {
   int socketfile;
-  struct socketaddr_in server_addr;
+  struct socketaddr_in serveraddr;
   int random_no;
 
   socketfile = socket(AF_INET, SOCK_STREAM, 0);
