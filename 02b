@@ -17,7 +17,7 @@ int main() {
 
   serveraddr.sin_port = htons(8080);
   serveraddr.sin_family = AF_INET;
-  serverddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  serverddr.sin_addr.s_addr = inet_addr("127.1.1.2");
   if (connect(socketfile, (struct socketaddr *)&serveraddr, sizeof(serveraddr)) < 0) {
     perror("connect");
     exit(1);
