@@ -1,0 +1,23 @@
+import socket
+
+def sendno(clientsocket, no):
+    data = str(no).encode()
+    clientsocket.sendto(data, ("localhost", 5000))
+
+def getno():
+    no = input("Enter a number: ")
+    return int(no)
+
+def receiveresponse(clientsocket):
+    response = clientsocket.rec(1024).dec()
+    return response
+
+def runclient():
+    clientsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    no = getno()
+    sendno(clientsocket, no)
+    response = receiveresponse(clientsocket)
+    print("The number is".format(no, response))
+
+if __name__ == "__main__":
+    runclient()
