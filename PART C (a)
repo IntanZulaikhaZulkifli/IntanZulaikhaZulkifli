@@ -1,0 +1,36 @@
+import socket
+import math
+
+def prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def request(clientsocket):
+    data = clientsocket.recv(1024).dec()
+    no = int(data)
+    response = "PRIME" if prime(no) else "NOT PRIME"
+    if response == "NOT PRIME":
+        factors = set()
+        for i in range(2, int(math.sqrt(no)) + 1):
+            if no % i == 0:
+                factors.add(i)
+                factors.add(o // i)
+        response += " (factors: {})".format(factors)
+    clientsocket.sendto(response.encode(), clientsocket.getname())
+
+def runserver():
+    host = "localhost"
+    port = 5000
+    serversocket.bind((host, port))
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    print("Server listening on port {}...".format(port))
+    while True:
+        clientsocket, addr = serversocket.recfrom(1024)
+        request(clientsocket)
+
+if __name__ == "__main__":
+    runserver()
