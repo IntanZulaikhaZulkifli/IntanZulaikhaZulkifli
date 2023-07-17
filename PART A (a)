@@ -32,7 +32,7 @@ int main() {
   close(file[1]);
 
   for (int i = 0; i < 3; i++) {
-    int bytes_read = read(filed[0], message, sizeof(message));
+    int bytes_read = read(file[0], message, sizeof(message));
     if (bytes_read > 0) {
       printf("Parent: Received message from child : , i + 1, message);
     }
