@@ -5,40 +5,40 @@
 #include <netinet/in.h>
 
 int main() {
-  int listen_file, conn_file;
-  struct sockaddr_in server_addr, client_addr;
+  int listenfile, connectfile;
+  struct socketaddr_in serveraddr, clientaddr;
   socklenght_t client;
-  int random_number;
+  int random_no;
 
-  listen_file = socket(AF_INET, SOCK_STREAM, 0);
-  if (listen_file < 0) {
+  listenfile = socket(AF_INET, SOCK_STREAM, 0);
+  if (listenfile < 0) {
     perror("socket");
     exit(1);
   }
 
-  server_addr.sin_family = AF_INET;
-  server_addr.sin_port = htons(8080);
-  server_addr.sin_addr.s_addr = INADDR_ANY;
-  if (bind(listen_file, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+  serveraddr.sin_family = AF_INET;
+  serveraddr.sin_port = htons(8080);
+  serveraddr.sin_addr.s_addr = INADDR_ANY;
+  if (bind(listenfile, (struct socketaddr *)&serveraddr, sizeof(serveraddr)) < 0) {
     perror("bind");
     exit(1);
   }
 
-  listen(listen_file, 5);
+  listen(listenfile, 5);
 
-  client = sizeof(client_addr);
-  connect_file = accept(listen_file, (struct sockaddr *)&client_addr, &client);
-  if (connect_file < 0) {
+  client = sizeof(clientaddr);
+  connectfile = accept(listenfile, (struct socketaddr *)&clientaddr, &client);
+  if (connectfile < 0) {
     perror("accept");
     exit(1);
   }
 
   random_no = random() % 30000 + 50000;
 
-  write(connect_file, &random_no, sizeof(random_no));
+  write(connectfile, &random_no, sizeof(random_no));
 
-  close(connect_file);
-  close(listen_file);
+  close(connectfile);
+  close(listenfile);
 
   return 0;
 }
